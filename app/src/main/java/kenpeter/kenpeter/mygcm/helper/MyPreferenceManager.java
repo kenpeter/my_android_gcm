@@ -2,7 +2,13 @@ package kenpeter.kenpeter.mygcm.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import kenpeter.kenpeter.mygcm.model.User;
+
+/**
+ * Created by Lincoln on 07/01/16.
+ */
 public class MyPreferenceManager {
 
     private String TAG = MyPreferenceManager.class.getSimpleName();
@@ -33,6 +39,29 @@ public class MyPreferenceManager {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+    }
+
+
+    public void storeUser(User user) {
+        editor.putString(KEY_USER_ID, user.getId());
+        editor.putString(KEY_USER_NAME, user.getName());
+        editor.putString(KEY_USER_EMAIL, user.getEmail());
+        editor.commit();
+
+        Log.e(TAG, "User is stored in shared preferences. " + user.getName() + ", " + user.getEmail());
+    }
+
+    public User getUser() {
+        if (pref.getString(KEY_USER_ID, null) != null) {
+            String id, name, email;
+            id = pref.getString(KEY_USER_ID, null);
+            name = pref.getString(KEY_USER_NAME, null);
+            email = pref.getString(KEY_USER_EMAIL, null);
+
+            User user = new User(id, name, email);
+            return user;
+        }
+        return null;
     }
 
     public void addNotification(String notification) {

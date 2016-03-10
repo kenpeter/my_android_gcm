@@ -37,6 +37,8 @@ import kenpeter.kenpeter.mygcm.app.MyApplication;
 /**
  * Created by Ravi on 01/06/15.
  */
+
+// Set notification to the phone.
 public class NotificationUtils {
 
     private static String TAG = NotificationUtils.class.getSimpleName();
